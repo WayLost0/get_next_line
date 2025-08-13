@@ -6,7 +6,7 @@
 /*   By: ryildiri <ryildiri@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 15:51:49 by ryildiri          #+#    #+#             */
-/*   Updated: 2025/08/13 20:46:08 by ryildiri         ###   ########.fr       */
+/*   Updated: 2025/08/13 21:34:56 by ryildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static char	*clean_stat(char *str)
 	unsigned int	j;
 	char			*new_str;
 
-	if (!str || *str)
-		return (NULL);
 	i = 0;
+	if (!str || str[i] == '\0')
+		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
@@ -80,7 +80,7 @@ char	*get_next_line(int fd)
 	while (!ft_strchr(stat, '\n') && read_bytes > 0)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes ==  0)
+		if (read_bytes == 0)
 			break;
 		buffer[read_bytes] = '\0';
 		if (!stat)
