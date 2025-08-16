@@ -6,7 +6,7 @@
 /*   By: ryildiri <ryildiri@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 15:53:15 by ryildiri          #+#    #+#             */
-/*   Updated: 2025/08/13 15:54:19 by ryildiri         ###   ########.fr       */
+/*   Updated: 2025/08/16 18:31:53 by ryildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_strdup(const char *str)
 	return (new_str);
 }
 
-char	*ft_strjoin(const char *str1, const char *str2)
+char	*ft_strjoin(char *str1, const char *str2)
 {
 	char			*new_str;
 	unsigned int	total_len;
@@ -81,6 +81,7 @@ char	*ft_strjoin(const char *str1, const char *str2)
 		new_str[i] = str1[i];
 		i++;
 	}
+	free(str1);
 	j = 0;
 	while (str2[j])
 	{

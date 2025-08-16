@@ -6,7 +6,7 @@
 /*   By: ryildiri <ryildiri@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 15:51:49 by ryildiri          #+#    #+#             */
-/*   Updated: 2025/08/13 21:34:56 by ryildiri         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:48:45 by ryildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ static char	*clean_stat(char *str)
 
 	i = 0;
 	if (!str || str[i] == '\0')
+	{
+		free(str);
 		return (NULL);
+	}
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
@@ -60,6 +63,7 @@ static char	*clean_stat(char *str)
 	j = 0;
 	while (str[i])
 		new_str[j++] = str[i++];
+	free(str);
 	new_str[j] = '\0';
 	return (new_str);
 }
@@ -68,7 +72,7 @@ char	*get_next_line(int fd)
 {
 	static char	*stat = NULL;
 	char		*buffer;
-	char		*line;
+	char		*line = NULL;
 	ssize_t		read_bytes;
 
 	if(fd < 0 || BUFFER_SIZE <= 0)
@@ -87,8 +91,15 @@ char	*get_next_line(int fd)
 			stat = ft_strdup(buffer);
 		else
 			stat = ft_strjoin(stat, buffer);
+		if (stat == NULL)
+			return(NULL);
 	}
+	free(buffer);
 	line = clean_line(stat);
+	if (line == NULL)
+		return (NULL);
 	stat = clean_stat(stat);
+	if (stat == NULL)
+		return (NULL);
 	return (line);
 }
