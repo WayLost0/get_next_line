@@ -6,7 +6,7 @@
 /*   By: ryildiri <ryildiri@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 15:53:15 by ryildiri          #+#    #+#             */
-/*   Updated: 2025/08/16 18:31:53 by ryildiri         ###   ########.fr       */
+/*   Updated: 2025/08/21 21:07:21 by ryildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,41 +42,17 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *str)
-{
-	unsigned int	i;
-	char			*new_str;
-
-	if (!str)
-		return (NULL);
-	new_str = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
-	if (!new_str)
-		return (NULL);
-	i = 0;
-	while (str[i])
-	{
-		new_str[i] = str[i];
-		i++;
-	}
-	new_str[i] = '\0';
-	return (new_str);
-}
-
 char	*ft_strjoin(char *str1, const char *str2)
 {
 	char			*new_str;
-	unsigned int	total_len;
 	unsigned int	i;
 	unsigned int	j;
 
-	if (!str1 || !str2)
-		return (NULL);
-	total_len = ft_strlen(str1) + ft_strlen(str2);
-	new_str = (char *)malloc(sizeof(char) * (total_len + 1));
+	new_str = (char *)malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
 	if (!new_str)
 		return (NULL);
 	i = 0;
-	while (str1[i])
+	while (str1 && str1[i])
 	{
 		new_str[i] = str1[i];
 		i++;
