@@ -6,7 +6,7 @@
 /*   By: ryildiri <ryildiri@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 15:53:15 by ryildiri          #+#    #+#             */
-/*   Updated: 2025/08/21 21:07:21 by ryildiri         ###   ########.fr       */
+/*   Updated: 2025/08/23 16:03:56 by ryildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ char	*ft_strjoin(char *str1, const char *str2)
 	char			*new_str;
 	unsigned int	i;
 	unsigned int	j;
+	unsigned int	total_len;
 
-	new_str = (char *)malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
+	total_len = ft_strlen(str1) + ft_strlen(str2);
+	new_str = (char *)malloc(sizeof(char) * (total_len + 1));
 	if (!new_str)
 		return (NULL);
 	i = 0;

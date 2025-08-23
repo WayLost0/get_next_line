@@ -6,7 +6,7 @@
 /*   By: ryildiri <ryildiri@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 15:51:49 by ryildiri          #+#    #+#             */
-/*   Updated: 2025/08/23 15:51:02 by ryildiri         ###   ########.fr       */
+/*   Updated: 2025/08/23 16:53:24 by ryildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+static char	*ft_return(char *str1, char *str2)
+{
+	free (str1);
+	free (str2);
+	return (NULL);
+}
 
 static char	*clean_line(char *star)
 {
@@ -52,10 +58,7 @@ static char	*clean_stat(char *star)
 
 	i = 0;
 	if (!star || star[i] == '\0')
-	{
-		free(star);
-		return (NULL);
-	}
+		return (ft_return(star, NULL));
 	while (star[i] && star[i] != '\n')
 		i++;
 	if (star[i] == '\n')
@@ -90,20 +93,16 @@ static char	*read_line(int fd, char *star)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (read_bytes == 0)
-			break;
+			break ;
 		if (read_bytes < 0)
-		{
-			free(buffer);
-			free(star);
-			return (NULL);
-		}
+			return (ft_return(buffer, star));
 		buffer[read_bytes] = '\0';
 		star = ft_strjoin(star, buffer);
 		if (!star)
-			break;
+			break ;
 	}
 	free (buffer);
-	return(star);
+	return (star);
 }
 
 char	*get_next_line(int fd)
@@ -123,7 +122,7 @@ char	*get_next_line(int fd)
 	if (!stat)
 	{
 		free(line);
-		return(NULL);
+		return (NULL);
 	}
 	return (line);
 }
