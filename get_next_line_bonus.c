@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ryildiri <ryildiri@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/13 15:51:49 by ryildiri          #+#    #+#             */
-/*   Updated: 2025/08/23 17:09:31 by ryildiri         ###   ########.fr       */
+/*   Created: 2025/08/23 17:11:34 by ryildiri          #+#    #+#             */
+/*   Updated: 2025/08/23 19:46:33 by ryildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <limits.h>
 
 static char	*ft_return(char *str1, char *str2)
 {
@@ -107,18 +108,18 @@ static char	*read_line(int fd, char *star)
 
 char	*get_next_line(int fd)
 {
-	static char	*stat = NULL;
+	static char	stat[1024];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stat = read_line(fd, stat);
+	stat[fd] = read_line(fd, stat);
 	if (!stat)
 		return (NULL);
 	line = clean_line(stat);
 	if (!line)
 		return (NULL);
-	stat = clean_stat(stat);
+	stat[fd] = clean_stat(stat);
 	if (!stat)
 	{
 		free(line);
